@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="dist/jquery.autocomplete.css" />
+    <script type="text/javascript" src="dist/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="dist/jquery.autocomplete.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input style="padding:2px 0 2px 20px;background-color: #FFFFFF;width: 160px;" type="text" id="member_info" value="" required="required" />
+</body>
+<script>
+    $("#member_info").autocomplete('ajax_get_member_list_auto.php', {
+        minChars: 0,
+        width: 310,
+        matchContains: "word",
+        cacheLength: 0,
+        highlightItem: true,
+        formatItem: function(row, i, max, term) {
+            var tmp;
+            tmp=row[0].split(",");
+            return "<strong>"+tmp[1]+"</strong>" + "<br><span style='font-size: 80%;'><span style='font-weight: bold;'>Father's/Spouse Name: " + tmp[9] + "</span><br>Branch: " + tmp[2] + "<br>Samity: " + tmp[3] + "<br>Working area: " + tmp[4] + "</span>";
+        },
+
+        formatResult: function(row) {
+            var tmp;
+            tmp=row[0].split(",");
+            return tmp[1];
+        }
+    }).result(function(e, item) {
+        //myCallback();
+        console.log(111);
+    });
+</script>
+</html>
